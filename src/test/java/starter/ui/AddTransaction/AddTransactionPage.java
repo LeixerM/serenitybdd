@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 
 public class AddTransactionPage {
 
-    public static Target BUTTON_ADD_TRANSACTION = Target.the("addTransaction button").located(By.xpath("//button[contains(., 'Añadir transacción')]"));
+    public static Target BUTTON_ADD_TRANSACTION = Target.the("addTransaction button").located(By.xpath("//button[@data-target='#transactionModal']"));
     public static Target INPUT_DATE = Target.the("addTransaction input").located(By.xpath("//input[@type='date']"));
     public static Target INPUT_AMOUNT = Target.the("amount input").located(By.id("amount"));
     public static Target INPUT_DESCRIPTION = Target.the("description input").located(By.id("description"));

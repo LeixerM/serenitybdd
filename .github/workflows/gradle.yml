@@ -27,6 +27,10 @@ jobs:
     - name: Grant execute permission for Gradlew
       run: chmod +x ./gradlew  # Otorga permiso de ejecución a gradlew
 
+    - name: Start Server
+      run: |
+        nohup python3 -m http.server 5500 &  # Inicia un servidor en el puerto 5500 en segundo plano
+
     - name: Build with Gradle
       run: ./gradlew clean test  # Ejecuta el build y las pruebas
 

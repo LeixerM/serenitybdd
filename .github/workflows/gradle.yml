@@ -30,9 +30,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew clean test  # Ejecuta el build y las pruebas
 
-    - name: Upload Serenity Report
+    - name: Test Report Generation
       uses: actions/upload-artifact@v4
-      if: sucess() || failed()  # Subir el reporte sin importar el resultado del build
+      if: success() || failure()  # Subir el reporte sin importar el resultado del build
       with:
         name: Serenity Report
         path: target/site/serenity  # Ruta del reporte de Serenity

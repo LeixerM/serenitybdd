@@ -1,0 +1,38 @@
+name: Serenity BDD Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 16
+      uses: actions/setup-java@v4
+      with:
+        java-version: '16.0.2'
+        distribution: 'temurin'
+        cache: gradle  # Cambia el caché a Gradle
+
+    - uses: browser-actions/setup-chrome@latest
+    - run: google-chrome --version  # Verificar la versión de Chrome
+
+    - name: Grant execute permission for Gradlew
+      run: chmod +x gradlew
+
+    - name: Build with Gradle
+      run: ./gradlew clean test aggregate  # Ejecuta el build y genera los reportes de Serenity
+
+    - name: Upload Serenity Report
+      uses: actions/upload-artifact@v4
+      if: always()  # Subir el reporte sin importar si el build falla o tiene éxito
+      with:
+        name: Serenity Report                 # Nombre del artefacto
+        path: target/site/serenity/           # Ruta del reporte de Serenity

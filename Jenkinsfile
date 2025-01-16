@@ -16,7 +16,7 @@ pipeline {
                     if (fileExists('gradlew.bat')) {
                         bat 'gradlew.bat clean test aggregate'
                     } else {
-                        bat 'gradle clean test aggregate'
+                        bat 'gradlew clean test aggregate'
                     }
                 }
             }

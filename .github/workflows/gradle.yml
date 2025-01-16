@@ -19,17 +19,20 @@ jobs:
       with:
         java-version: '16.0.2'
         distribution: 'temurin'
-        cache: gradle  # Cambia el caché a Gradle
+        cache: gradle
 
     - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version  # Verificar la versión de Chrome
+    - run: google-chrome --version  # Verificar la versión de Chrome
+
+    - name: Grant execute permission for Gradlew
+      run: chmod +x ./gradlew  # Otorga permiso de ejecución a gradlew
 
     - name: Build with Gradle
-      run: ./gradlew clean test  # Ejecuta el build y genera los reportes de Serenity
+      run: ./gradlew clean test  # Ejecuta el build y las pruebas
 
-    - name: Test Report Generation
+    - name: Upload Serenity Report
       uses: actions/upload-artifact@v4
-      if: success() || failure()
+      if: success() || failure()  # Subir el reporte sin importar el resultado del build
       with:
-        name: Serenity Report                 # Nombre del artefacto
-        path: target/site/serenity           # Ruta del reporte de Serenity
+        name: Serenity Report
+        path: target/site/serenity

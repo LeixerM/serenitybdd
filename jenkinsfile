@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clona el repositorio desde GitHub
-                git url: 'https://github.com/tu_usuario/tu_repositorio.git', branch: 'main'
+                git url: 'https://github.com/LeixerM/serenitybdd.git', branch: 'main'
             }
         }
 

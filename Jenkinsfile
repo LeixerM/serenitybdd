@@ -13,10 +13,10 @@ pipeline {
             steps {
                 // Limpia y ejecuta las pruebas
                 script {
-                    if (fileExists('gradlew')) {
-                        sh './gradlew clean test aggregate'
+                    if (fileExists('gradlew.bat')) {
+                        bat 'gradlew.bat clean test aggregate'
                     } else {
-                        sh 'gradle clean test aggregate'
+                        bat 'gradle clean test aggregate'
                     }
                 }
             }

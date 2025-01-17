@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
+    - uses: actions/checkout@v4  # Obtiene el código fuente del repositorio
+
     - name: Set up JDK 16
       uses: actions/setup-java@v4
       with:
@@ -22,20 +21,18 @@ jobs:
         cache: gradle
 
     - uses: browser-actions/setup-chrome@latest
-    - run: google-chrome --version  # Verificar la versión de Chrome
+      run: google-chrome --version  # Verifica la versión de Chrome
 
     - name: Grant execute permission for Gradlew
       run: chmod +x ./gradlew  # Otorga permiso de ejecución a gradlew
 
     - name: Start Server
       run: |
-        cd ./recursos/login/login.html
-        nohup python3 -m http.server 5500 &  # Inicia un servidor en el puerto 5500 en segundo plano
-        sleep 10  # Espera 10 segundos para que el servidor esté listo
+        nohup python3 -m http.server 5500 &  # Inicia el servidor en segundo plano en el puerto 5500
 
-    - name: Check Server Availability
+    - name: Check if login.html is accessible
       run: |
-        curl -I http://127.0.0.1:5500/login.html  # Verifica que el servidor esté disponible
+        curl -I http://127.0.0.1:5500/recursos/login/login.html  # Verifica que el archivo sea accesible
 
     - name: Build with Gradle
       run: ./gradlew clean test  # Ejecuta el build y las pruebas
@@ -45,4 +42,4 @@ jobs:
       if: success() || failure()  # Subir el reporte sin importar el resultado del build
       with:
         name: Serenity Report
-        path: target/site/serenity  # Ruta del reporte de Serenity
+        path: target/site/serenity 

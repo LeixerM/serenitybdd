@@ -29,7 +29,7 @@ jobs:
 
     - name: Start Server
       run: |
-        cd C:\Users\USER\Downloads\recursos\login\login.html
+        cd ./recursos/login/login.html
         nohup python3 -m http.server 5500 &  # Inicia un servidor en el puerto 5500 en segundo plano
         sleep 10  # Espera 10 segundos para que el servidor esté listo
 

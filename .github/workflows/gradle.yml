@@ -20,7 +20,10 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - uses: browser-actions/setup-chrome@latest
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest  # Instala Google Chrome
+
+    - name: Verify Chrome Version
       run: google-chrome --version  # Verifica la versión de Chrome
 
     - name: Grant execute permission for Gradlew
